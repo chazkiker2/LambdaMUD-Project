@@ -25,12 +25,12 @@ def initialize(request):
     user = request.user
     player = user.player
     player_id = player.id
-    uuid = player.uuid
+    player_uuid = player.uuid
     room = player.room()
     players = room.player_names(player_id)
     return JsonResponse(
         {
-            'uuid': uuid,
+            'uuid': player_uuid,
             'name': player.user.username,
             'title': room.title,
             'description': room.description,
@@ -64,29 +64,54 @@ def move(request):
     elif direction == "w":
         next_room_id = room.w_to
     if next_room_id is not None and next_room_id > 0:
-        nextRoom = Room.objects.get(id=next_room_id)
+        next_room = Room.objects.get(id=next_room_id)
         player.current_room = next_room_id
         player.save()
-        players = nextRoom.player_names(player_id)
+        players = next_room.player_names(player_id)
         current_player_uuids = room.player_uuids(player_id)
-        next_player_uuids = nextRoom.player_uuids(player_id)
+        next_player_uuids = next_room.player_uuids(player_id)
         for p_uuid in current_player_uuids:
-            pusher.trigger(f'p-channel-{p_uuid}', u'broadcast',
-                           {'message': f'{player.user.username} has walked {dirs[direction]}.'})
+            pusher.trigger(
+                f'p-channel-{p_uuid}',
+                u'broadcast',
+                {'message': f'{player.user.username} has walked {dirs[direction]}.'}
+            )
         for p_uuid in next_player_uuids:
-            pusher.trigger(f'p-channel-{p_uuid}', u'broadcast',
-                           {'message': f'{player.user.username} has entered from the {reverse_dirs[direction]}.'})
-        return JsonResponse({'name': player.user.username, 'title': nextRoom.title, 'description': nextRoom.description,
-                             'players': players, 'error_msg': ""}, safe=True)
+            pusher.trigger(
+                f'p-channel-{p_uuid}',
+                u'broadcast',
+                {'message': f'{player.user.username} has entered from the {reverse_dirs[direction]}.'}
+            )
+        return JsonResponse(
+            {
+                'name': player.user.username,
+                'title': next_room.title,
+                'description': next_room.description,
+                'players': players,
+                'error_msg': ""
+            },
+            safe=True
+        )
     else:
         players = room.player_names(player_id)
         return JsonResponse(
-            {'name': player.user.username, 'title': room.title, 'description': room.description, 'players': players,
-             'error_msg': "You cannot move that way."}, safe=True)
+            {
+                'name': player.user.username,
+                'title': room.title,
+                'description': room.description,
+                'players': players,
+                'error_msg': "You cannot move that way."
+            },
+            safe=True
+        )
 
 
 @csrf_exempt
 @api_view(["POST"])
 def say(request):
     # IMPLEMENT
-    return JsonResponse({'error': "Not yet implemented"}, safe=True, status=500)
+    return JsonResponse(
+        {'error': "Not yet implemented"},
+        safe=True,
+        status=500
+    )
