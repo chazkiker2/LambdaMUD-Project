@@ -14,46 +14,52 @@ class Room(models.Model):
     e_to = models.IntegerField(default=0)
     w_to = models.IntegerField(default=0)
 
-    def connectRooms(self, destinationRoom, direction):
-        destinationRoomID = destinationRoom.id
+    def __str__(self):
+        return f"<Room: {self.id}, {self.title}>"
+
+    def connect_rooms(self, destination_room, direction):
+        destination_room_id = destination_room.id
         try:
-            destinationRoom = Room.objects.get(id=destinationRoomID)
+            destination_room = Room.objects.get(id=destination_room_id)
         except Room.DoesNotExist:
             print("That room does not exist")
         else:
             if direction == "n":
-                self.n_to = destinationRoomID
+                self.n_to = destination_room_id
             elif direction == "s":
-                self.s_to = destinationRoomID
+                self.s_to = destination_room_id
             elif direction == "e":
-                self.e_to = destinationRoomID
+                self.e_to = destination_room_id
             elif direction == "w":
-                self.w_to = destinationRoomID
+                self.w_to = destination_room_id
             else:
                 print("Invalid direction")
                 return
             self.save()
 
-    def playerNames(self, currentPlayerID):
-        return [p.user.username for p in Player.objects.filter(currentRoom=self.id) if p.id != int(currentPlayerID)]
+    def player_names(self, current_player_id):
+        return [p.user.username for p in Player.objects.filter(currentRoom=self.id) if p.id != int(current_player_id)]
 
-    def playerUUIDs(self, currentPlayerID):
-        return [p.uuid for p in Player.objects.filter(currentRoom=self.id) if p.id != int(currentPlayerID)]
+    def player_uuids(self, current_player_id):
+        return [p.uuid for p in Player.objects.filter(currentRoom=self.id) if p.id != int(current_player_id)]
 
 
 class Player(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    currentRoom = models.IntegerField(default=0)
+    current_room = models.IntegerField(default=0)
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
 
+    def __str__(self):
+        return f"<Player: {self.user.username}>"
+
     def initialize(self):
-        if self.currentRoom == 0:
-            self.currentRoom = Room.objects.first().id
+        if self.current_room == 0:
+            self.current_room = Room.objects.first().id
             self.save()
 
     def room(self):
         try:
-            return Room.objects.get(id=self.currentRoom)
+            return Room.objects.get(id=self.current_room)
         except Room.DoesNotExist:
             self.initialize()
             return self.room()
