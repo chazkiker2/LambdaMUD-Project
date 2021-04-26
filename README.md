@@ -7,12 +7,12 @@
   - [About](#about)
   - [Links & Resources](#links--resources)
   - [Git Commits](#git-commits)
-  - [Trello Set Up:](#trello-set-up)
+  - [Trello Set Up](#trello-set-up)
   - [MVP Features](#mvp-features)
     - [Client](#client)
     - [Server](#server)
     - [General](#general)
-  - [Extra Features:](#extra-features)
+  - [Extra Features](#extra-features)
   - [Local Development: Directions](#local-development-directions)
     - [Set up a Pusher account](#set-up-a-pusher-account)
     - [Set up your local server](#set-up-your-local-server)
@@ -25,7 +25,7 @@
     - [Deploy server to Heroku](#deploy-server-to-heroku)
     - [Client Frontend](#client-frontend)
     - [Troubleshooting](#troubleshooting)
-      - [Heroku errors with `config`](#heroku-errors-with-config)
+      - [Heroku Errors with `config`](#heroku-errors-with-config)
       - [Nondescript `500` error](#nondescript-500-error)
       - [Generator expression must be parenthesized (option A)](#generator-expression-must-be-parenthesized-option-a)
       - [Generator expression must be parenthesized (option B)](#generator-expression-must-be-parenthesized-option-b)
@@ -62,7 +62,7 @@ below using any other technologies you have learned here at Lambda
 School. There are design files in this repository you should use as a
 creative guide.
 
-## Links & Resources 
+## Links & Resources
 
 - [Trello Board](https://trello.com/b/lSiqM44H/lambdamud-chaz)
 
@@ -73,7 +73,7 @@ creative guide.
   help. This also allows the client to get progress reports from the
   company in a real world setting.
 
-## Trello Set Up:
+## Trello Set Up
 
 - [x] Create a Trello account if you don't have one already
 - [x] Create a new board called "LambdaMUD - {Your Name}"
@@ -118,7 +118,7 @@ Once your MVP has been approved, you have been given a feature list that
 the client would love to have completed. Your goal would be to finish
 MVP as soon as you can and get working the list of features.
 
-## Extra Features:
+## Extra Features
 
 - [ ] Add a `shout` command that broadcasts a message to every player
 - [ ] Add a `whisper` command that sends a private message to a single player
@@ -222,7 +222,7 @@ MVP as soon as you can and get working the list of features.
 - Use the [sprint challenge instructions for Intro to Django](https://github.com/LambdaSchool/Sprint-Challenge--Django-I).
 - Add environment variables to heroku using `heroku config:set KEY=VALUE`
   - It is recommended that if you are having trouble (e.g. 500 server errors) to set
-    
+
     ```shell
     DEBUG=TRUE
     ```
