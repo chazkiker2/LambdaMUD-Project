@@ -38,10 +38,10 @@ class Room(models.Model):
             self.save()
 
     def player_names(self, current_player_id):
-        return [p.user.username for p in Player.objects.filter(currentRoom=self.id) if p.id != int(current_player_id)]
+        return [p.user.username for p in Player.objects.filter(current_room=self.id) if p.id != int(current_player_id)]
 
     def player_uuids(self, current_player_id):
-        return [p.uuid for p in Player.objects.filter(currentRoom=self.id) if p.id != int(current_player_id)]
+        return [p.uuid for p in Player.objects.filter(current_room=self.id) if p.id != int(current_player_id)]
 
 
 class Player(models.Model):
