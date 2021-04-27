@@ -7,5 +7,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
     path('api/adv/', include('adventure.urls')),
-    path('hello-webpack/', TemplateView.as_view(template_name='hello_webpack.html'))
+    path('hello-webpack/', TemplateView.as_view(template_name='react_app.html'))
 ]
