@@ -14,13 +14,13 @@ class ReactView(TemplateView):
 
 
 urlpatterns = [
-    path('docs/', include_docs_urls(title='My API service'), name='api-docs'),
+    # path('docs/', include_docs_urls(title='My API service'), name='api-docs'),
     # path('', include('rest_auth.urls')),
     # path('registration/', include('rest_auth.registration.urls')),
     # this route catches the "naked" URL with no path specified. you can link to it in most places
-    path(r"my-react-page/", ReactView.as_view(), name="react_app"),
+    path(r"react/", ReactView.as_view(), name="react_app"),
     # this route catches any url below the main one, so the path can be passed to the front end
-    path(r'my-react-page/<path:path>', ReactView.as_view(), name='react_app_with_path'),
+    path(r'react/<path:path>', ReactView.as_view(), name='react_app_with_path'),
     path("api-login", csrf_exempt(LoginView.as_view()), name="api-login"),
     path("api-register", csrf_exempt(RegisterView.as_view()), name="api-register"),
 ]

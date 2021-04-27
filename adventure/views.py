@@ -1,8 +1,44 @@
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
-from models import Room
+from django.contrib.auth.models import User, Group
 
+from rest_framework import viewsets
+from rest_framework import permissions
+
+from .models import Room, Player
+from .serializers import UserSerializer, GroupSerializer, PlayerSerializer, RoomSerializer
+
+
+# --------------------------------
+# REST FRAMEWORK VIEWS
+# --------------------------------
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all().order_by("-date_joined")
+    serializer_class = UserSerializer
+    permissions = [permissions.IsAuthenticated]
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    permissions = [permissions.IsAuthenticated]
+
+
+class RoomViewSet(viewsets.ModelViewSet):
+    queryset = Room.objects.all()
+    serializer_class = RoomSerializer
+
+
+class PlayerViewSet(viewsets.ModelViewSet):
+    queryset = Player.objects.all()
+    serializer_class = PlayerSerializer
+
+
+# --------------------------------
+# TEMPLATED VIEWS
+# --------------------------------
 
 @method_decorator(login_required, name="dispatch")
 class GameView(TemplateView):

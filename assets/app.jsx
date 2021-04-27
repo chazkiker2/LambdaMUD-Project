@@ -31,9 +31,9 @@ const AppBar = props => (
     >
         {props.children}
         <Nav direction="row">
-            <Anchor href="/api/my-react-page/login">Login</Anchor>
-            <Anchor href="/api/my-react-page/register">Register</Anchor>
-            <Anchor href="/api/my-react-page/game">Game</Anchor>
+            <Anchor href="/api/react/login">Login</Anchor>
+            <Anchor href="/api/react/register">Register</Anchor>
+            <Anchor href="/api/react/game">Game</Anchor>
         </Nav>
     </Box>
 )
@@ -41,7 +41,7 @@ const AppBar = props => (
 function App() {
     return (
         <Grommet theme={theme}>
-            <Router basename="/api/my-react-page">
+            <Router basename="/api/react">
                 <Switch>
                     <Route path="/login">
                         <AppBar>MUD.</AppBar>
