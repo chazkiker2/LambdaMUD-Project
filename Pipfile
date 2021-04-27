@@ -16,6 +16,8 @@ django-heroku = "*"
 django-rest-api = "*"
 psycopg2-binary = "*"
 coreapi-cli = "*"
+pyyaml = "*"
+uritemplate = "*"
 
 [dev-packages]
 
