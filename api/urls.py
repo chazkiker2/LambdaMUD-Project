@@ -1,3 +1,5 @@
+from rest_auth.views import LoginView
+from rest_auth.registration.views import RegisterView
 from django.urls import include, path
 from django.contrib.auth import login, authenticate
 from django.views.decorators.csrf import csrf_exempt
@@ -13,12 +15,12 @@ def mud_login(request):
     username = user_info['username']
     password = user_info['password']
     user = authenticate(request, username=username, password=password)
-
     if user is not None:
+        print(user)
         login(request, user)
         return JsonResponse(
             status=200,
-            data={**user},
+            data={"success": True},
             safe=True
         )
     else:
@@ -26,7 +28,8 @@ def mud_login(request):
 
 
 urlpatterns = [
-    path('', include('rest_auth.urls')),
-    path("api-login", mud_login, name="api-login"),
-    path('registration/', include('rest_auth.registration.urls')),
+    # path('', include('rest_auth.urls')),
+    # path('registration/', include('rest_auth.registration.urls')),
+    path("api-login", csrf_exempt(LoginView.as_view()), name="api-login"),
+    path("api-register", csrf_exempt(RegisterView.as_view()), name="api-register"),
 ]
