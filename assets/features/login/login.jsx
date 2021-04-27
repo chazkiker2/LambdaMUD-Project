@@ -12,22 +12,6 @@ import {
     Text,
 } from "grommet"
 
-// import Form from "grommet/components/Form"
-// import FormField from "grommet/components/FormField"
-// import TextInput from "grommet/components/TextInput"
-// import Box from "grommet/components/Box"
-// import Button from "grommet/components/Button"
-// import Heading from "grommet/components/Heading"
-// import Text from "grommet/components/Text"
-
-// const Form = Grommet.Form
-// const FormField = Grommet.FormField
-// const TextInput = Grommet.TextInput
-// const Box = Grommet.Box
-// const Button = Grommet.Button
-// const Heading = Grommet.Heading
-// const Text = Grommet.Tex
-
 const initState = {
     username: "",
     password: "",

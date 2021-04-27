@@ -15,30 +15,6 @@ import {
     TextInput,
 } from "grommet"
 
-// import Box from "grommet/components/Box"
-// import Heading from "grommet/components/Heading"
-// import Text from "grommet/components/Text"
-// import Card from "grommet/components/Card"
-// import CardHeader from "grommet/components/CardHeader"
-// import CardBody from "grommet/components/CardBody"
-// import CardFooter from "grommet/components/CardFooter"
-// import Button from "grommet/components/Button"
-// import Form from "grommet/components/Form"
-// import FormField from "grommet/components/FormField"
-// import TextInput from "grommet/components/TextInput"
-
-// const Box = Grommet.Box
-// const Heading = Grommet.Heading
-// const Text = Grommet.Text
-// const Card = Grommet.Card
-// const CardHeader = Grommet.CardHeader
-// const CardBody = Grommet.CardBody
-// const CardFooter = Grommet.CardFooter
-// const Button = Grommet.Button
-// const Form = Grommet.Form
-// const FormField = Grommet.FormField
-// const TextInput = Grommet.TextInput
-
 const directionMap = {
     n: "north",
     north: "n",
