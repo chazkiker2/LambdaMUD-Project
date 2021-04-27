@@ -105,12 +105,31 @@ def move(request):
         )
 
 
+# ex: "/api/adv/say"
+#
+# curl -X POST -H 'Authorization: Token TOKEN' -H "Content-Type: application/json" \
+# -d '{"message":"Hello World!"}' localhost:8000/api/adv/say/
 @csrf_exempt
 @api_view(["POST"])
 def say(request):
-    # IMPLEMENT
+    player = request.user.player
+    message = json.loads(request.body)["message"]
+    room = player.room()
+    players = {
+        "names": room.player_names(player.id),
+        "uuids": room.player_uuids(player.id)
+    }
+    for p_uuid in players["uuids"]:
+        pusher.trigger(
+            f"p-channel-{p_uuid}",
+            u"broadcast",
+            {
+                "message": message
+            }
+        )
+
     return JsonResponse(
-        {'error': "Not yet implemented"},
+        {"players": players["uuids"]},
         safe=True,
-        status=500
+        status=200
     )
