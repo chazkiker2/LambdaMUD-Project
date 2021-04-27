@@ -46,7 +46,7 @@ function Game() {
     React.useEffect(() => {
         api.initialize()
             .then(res => {
-                setRoom({...res.data})
+                setRoom({ ...res.data })
             })
             .catch(err => setError(err.message))
     }, [])
@@ -90,11 +90,11 @@ function Game() {
                             </Text>
                             <Text>
                                 Other Players:
-                                <br/>
+                                <br />
                                 {room.players.length > 0
                                     ? room.players.map(player => (
-                                        <p key={player.uuid}>{player.name}</p>
-                                    ))
+                                          <p key={player.uuid}>{player.name}</p>
+                                      ))
                                     : "None"}
                             </Text>
                         </CardBody>
@@ -126,7 +126,7 @@ function Game() {
                 {error && (
                     <Text color="status-critical" textAlign="center">
                         <strong>There's been an error!</strong>
-                        <br/>
+                        <br />
                         {error}
                     </Text>
                 )}
@@ -134,7 +134,7 @@ function Game() {
                     value={input}
                     onChange={next => setInput(next)}
                     onReset={() => setInput(initInput)}
-                    onSubmit={({value}) => {
+                    onSubmit={({ value }) => {
                         api.say(value)
                             .then(res => {
                                 // TODO: display success message
@@ -147,11 +147,11 @@ function Game() {
                     }}
                 >
                     <FormField name="message" label="Message">
-                        <TextInput name="message"/>
+                        <TextInput name="message" />
                     </FormField>
                     <Box direction="row" justify="center" gap="medium">
-                        <Button type="submit" primary label="Submit"/>
-                        <Button type="reset" label="Reset"/>
+                        <Button type="submit" primary label="Submit" />
+                        <Button type="reset" label="Reset" />
                     </Box>
                 </Form>
             </Box>

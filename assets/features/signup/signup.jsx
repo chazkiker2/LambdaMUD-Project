@@ -1,16 +1,7 @@
 import React from "react"
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import api from "../../utils"
-
-import {
-    Form,
-    FormField,
-    TextInput,
-    Box,
-    Button,
-    Heading,
-    Text,
-} from "grommet"
+import { Form, FormField, TextInput, Box, Button, Heading, Text } from "grommet"
 
 const initState = {
     username: "",
@@ -19,7 +10,7 @@ const initState = {
 }
 
 function Signup() {
-    const {push} = useHistory()
+    const { push } = useHistory()
     const [userInput, setUserInput] = React.useState(initState)
     const [error, setError] = React.useState("")
     return (
@@ -31,7 +22,7 @@ function Signup() {
                         value={userInput}
                         onChange={nextValue => setUserInput(nextValue)}
                         onReset={() => setUserInput(initState)}
-                        onSubmit={({value}) =>
+                        onSubmit={({ value }) =>
                             api
                                 .register(value)
                                 .then(res => {
@@ -45,23 +36,23 @@ function Signup() {
                         }
                     >
                         <FormField name="username" label="Username">
-                            <TextInput name="username"/>
+                            <TextInput name="username" />
                         </FormField>
                         <FormField name="password1" label="Password">
-                            <TextInput name="password1"/>
+                            <TextInput name="password1" />
                         </FormField>
                         <FormField name="password2" label="Confirm Password">
-                            <TextInput name="password2"/>
+                            <TextInput name="password2" />
                         </FormField>
                         <Box direction="row" justify="center" gap="medium">
-                            <Button type="submit" primary label="Submit"/>
-                            <Button type="reset" label="Reset"/>
+                            <Button type="submit" primary label="Submit" />
+                            <Button type="reset" label="Reset" />
                         </Box>
                     </Form>
                     {error && (
                         <Text color="status-critical" textAlign="center">
                             <strong>There's been an error!</strong>
-                            <br/>
+                            <br />
                             {error}
                         </Text>
                     )}

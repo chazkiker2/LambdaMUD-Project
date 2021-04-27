@@ -1,0 +1,5 @@
+build
+coverage
+static
+*.html
+!*.js?x

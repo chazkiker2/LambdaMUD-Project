@@ -1,12 +1,6 @@
 import React from "react"
-import {
-    Box,
-    Grommet,
-    Nav,
-    Anchor,
-    Heading
-} from "grommet"
-import {Switch, BrowserRouter as Router, Route} from "react-router-dom"
+import { Box, Grommet, Nav, Anchor, Heading } from "grommet"
+import { Switch, BrowserRouter as Router, Route } from "react-router-dom"
 import Login from "./features/login/login"
 import Register from "./features/signup/signup"
 import Game from "./features/game/game"
@@ -30,9 +24,9 @@ const AppBar = props => (
         direction="row"
         align="center"
         justify="between"
-        pad={{left: "medium", right: "small", vertical: "small"}}
+        pad={{ left: "medium", right: "small", vertical: "small" }}
         elevation="medium"
-        style={{zIndex: "1"}}
+        style={{ zIndex: "1" }}
         {...props}
     >
         {props.children}
@@ -51,19 +45,23 @@ function App() {
                 <Switch>
                     <Route path="/login">
                         <AppBar>MUD.</AppBar>
-                        <Login/>
+                        <Login />
                     </Route>
                     <Route path="/register">
                         <AppBar>MUD.</AppBar>
-                        <Register/>
+                        <Register />
                     </Route>
                     <Route path="/game">
                         <AppBar>MUD.</AppBar>
-                        <Game/>
+                        <Game />
                     </Route>
                     <Route exact path="/">
                         <AppBar>MUD.</AppBar>
-                        <Heading>Welcome to the...<br/>  Multi-User Dungeon (MUD) <br/>Text Adventure Game</Heading>
+                        <Heading>
+                            Welcome to the...
+                            <br /> Multi-User Dungeon (MUD) <br />
+                            Text Adventure Game
+                        </Heading>
                     </Route>
                 </Switch>
             </Router>
