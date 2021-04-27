@@ -7,6 +7,15 @@ import uuid
 
 
 class Room(models.Model):
+    DIRECTION_MAP = {
+        "n": "north",
+        "s": "south",
+        "e": "east",
+        "w": "west"
+    }
+    REVERSE_DIRECTION_MAP = {
+        key: value for key, value in DIRECTION_MAP.items()
+    }
     title = models.CharField(max_length=50, default="DEFAULT TITLE")
     description = models.CharField(max_length=500, default="DEFAULT DESCRIPTION")
     n_to = models.IntegerField(default=0)

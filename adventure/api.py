@@ -46,8 +46,7 @@ def initialize(request):
 # -d '{"direction":"n"}' localhost:8000/api/adv/move/
 @api_view(["POST"])
 def move(request):
-    dirs = {"n": "north", "s": "south", "e": "east", "w": "west"}
-    reverse_dirs = {"n": "south", "s": "north", "e": "west", "w": "east"}
+
     player = request.user.player
     player_id = player.id
     player_uuid = player.uuid
@@ -74,13 +73,13 @@ def move(request):
             pusher.trigger(
                 f'p-channel-{p_uuid}',
                 u'broadcast',
-                {'message': f'{player.user.username} has walked {dirs[direction]}.'}
+                {'message': f'{player.user.username} has walked {Room.DIRECTION_MAP[direction]}.'}
             )
         for p_uuid in next_player_uuids:
             pusher.trigger(
                 f'p-channel-{p_uuid}',
                 u'broadcast',
-                {'message': f'{player.user.username} has entered from the {reverse_dirs[direction]}.'}
+                {'message': f'{player.user.username} has entered from the {Room.REVERSE_DIRECTION_MAP[direction]}.'}
             )
         return JsonResponse(
             {

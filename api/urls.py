@@ -1,11 +1,8 @@
 from rest_auth.views import LoginView
 from rest_auth.registration.views import RegisterView
 from django.urls import include, path
-from django.contrib.auth import login, authenticate
+from rest_framework.documentation import include_docs_urls
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse, JsonResponse
-from rest_framework.decorators import api_view
-import json
 from django.views.generic import TemplateView
 
 
@@ -17,6 +14,7 @@ class ReactView(TemplateView):
 
 
 urlpatterns = [
+    path('docs/', include_docs_urls(title='My API service'), name='api-docs'),
     # path('', include('rest_auth.urls')),
     # path('registration/', include('rest_auth.registration.urls')),
     # this route catches the "naked" URL with no path specified. you can link to it in most places

@@ -15,15 +15,13 @@ import {
     TextInput,
 } from "grommet"
 
+const DIRECTION_MAP = JSON.parse(
+    document.getElementById("direction_maps").textContent
+)
+
 const directionMap = {
-    n: "north",
-    north: "n",
-    e: "east",
-    east: "e",
-    s: "south",
-    south: "s",
-    w: "west",
-    west: "w",
+    ...DIRECTION_MAP["DIRECTION_MAP"],
+    ...DIRECTION_MAP["REVERSE_DIRECTION_MAP"],
 }
 
 const initDirections = {
