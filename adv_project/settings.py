@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 from decouple import config
 import django_heroku
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -69,7 +70,7 @@ ROOT_URLCONF = 'adv_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -112,8 +113,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
-
 REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': [
     #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
@@ -144,6 +143,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

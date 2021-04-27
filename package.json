@@ -1,0 +1,45 @@
+{
+  "name": "LambdaMUD-Project",
+  "version": "1.0.0",
+  "description": "## Table of Contents",
+  "main": "webpack.config.js",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chazkiker2/LambdaMUD-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chazkiker2/LambdaMUD-Project/issues"
+  },
+  "homepage": "https://github.com/chazkiker2/LambdaMUD-Project#readme",
+  "devDependencies": {
+    "@babel/core": "^7.13.16",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.36.0",
+    "webpack-cli": "^4.6.0"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
+    "coreapi": "^0.1.1",
+    "grommet": "^2.17.1",
+    "grommet-icons": "^4.5.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "styled-components": "^5.2.3",
+    "web-vitals": "^1.1.1"
+  }
+}
