@@ -25,13 +25,7 @@ function Signup() {
                         onSubmit={({ value }) =>
                             api
                                 .register(value)
-                                .then(res => {
-                                    window.localStorage.setItem(
-                                        "key",
-                                        res.data.key
-                                    )
-                                    push("/game")
-                                })
+                                .then(res => push("/game"))
                                 .catch(err => setError(err.message))
                         }
                     >
