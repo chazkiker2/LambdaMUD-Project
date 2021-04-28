@@ -16,14 +16,21 @@ function act(path, params) {
     if (!schema) {
         throw new Error("schema should not be undefined")
     }
-    let level = schema
+    let level = schema.content
     for (let i = 0; i < path.length; i++) {
-        level = schema[path[i]]
-        console.log({schemaLevel: level})
+        console.log({ i, schemaLevel: level })
+        level = level[path[i]]
     }
     const clientResponse = client.action(schema, path, params)
-    console.log({client, schema, level})
-    console.log({clientResponse})
+    console.log({
+        client,
+        schema,
+        path,
+        params,
+        atPath: schema[[...path]],
+        level,
+    })
+    console.log({ clientResponse })
 
     return clientResponse
 }
