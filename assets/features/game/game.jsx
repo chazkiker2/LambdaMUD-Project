@@ -46,23 +46,22 @@ function Game() {
     React.useEffect(() => {
         api.initialize()
             .then(res => {
-                setRoom({...res})
+                setRoom({ ...res })
             })
             .catch(err => setError(err.message))
     }, [])
 
     function handleMove(direction) {
         api.move(direction)
-            .then(res => {
-                console.log({res})
-                if (res.data.error_msg) {
-                    setError(res.data.error_msg)
+            .then(data => {
+                if (data.error_msg) {
+                    setError(data.error_msg)
                     setValid(prev => ({
                         ...prev,
                         [directionMap[direction]]: false,
                     }))
                 } else {
-                    setRoom(res.data)
+                    setRoom(data)
                     setValid(initDirections)
                     setError(null)
                 }
@@ -93,8 +92,8 @@ function Game() {
                                 <Text>Other Players:</Text>
                                 {room?.players?.length > 0
                                     ? room.players.map(player => (
-                                        <p key={player}>{player}</p>
-                                    ))
+                                          <p key={player}>{player}</p>
+                                      ))
                                     : "None"}
                             </Box>
                         </CardBody>
@@ -126,7 +125,7 @@ function Game() {
                 {error && (
                     <Text color="status-critical" textAlign="center">
                         <strong>There's been an error!</strong>
-                        <br/>
+                        <br />
                         {error}
                     </Text>
                 )}
@@ -134,7 +133,7 @@ function Game() {
                     value={input}
                     onChange={next => setInput(next)}
                     onReset={() => setInput(initInput)}
-                    onSubmit={({value}) => {
+                    onSubmit={({ value }) => {
                         api.say(value)
                             .then(res => {
                                 // TODO: display success message
@@ -147,11 +146,11 @@ function Game() {
                     }}
                 >
                     <FormField name="message" label="Message">
-                        <TextInput name="message"/>
+                        <TextInput name="message" />
                     </FormField>
                     <Box direction="row" justify="center" gap="medium">
-                        <Button type="submit" primary label="Submit"/>
-                        <Button type="reset" label="Reset"/>
+                        <Button type="submit" primary label="Submit" />
+                        <Button type="reset" label="Reset" />
                     </Box>
                 </Form>
             </Box>
