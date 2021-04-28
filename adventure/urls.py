@@ -17,6 +17,7 @@ urlpatterns = [
     path("", include(router.urls)),
     path('docs/', include_docs_urls(
         title="MUD Text Adventure | API Docs",
+        public=True
     ), name='api-docs'),
     path('openapi', get_schema_view(
         title="MUD Text Adventure | OpenAPI Docs",

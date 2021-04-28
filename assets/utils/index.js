@@ -25,6 +25,9 @@ function config() {
 
 function act(path, params) {
     config()
+    if (!window.schema) {
+        throw new Error("window.schema should not be undefined")
+    }
     return window.client.action(window.schema, path, params)
 }
 
