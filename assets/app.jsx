@@ -18,7 +18,7 @@ const theme = {
     },
 }
 
-const AppBar = props => (
+const NavBar = props => (
     <Box
         tag="header"
         direction="row"
@@ -29,11 +29,11 @@ const AppBar = props => (
         style={{ zIndex: "1" }}
         {...props}
     >
-        {props.children}
+        MUD.
         <Nav direction="row">
-            <Anchor href="/api/react/login">Login</Anchor>
-            <Anchor href="/api/react/register">Register</Anchor>
-            <Anchor href="/api/react/game">Game</Anchor>
+            <Anchor href="/react/login">Login</Anchor>
+            <Anchor href="/react/register">Register</Anchor>
+            <Anchor href="/react/game">Game</Anchor>
         </Nav>
     </Box>
 )
@@ -41,22 +41,22 @@ const AppBar = props => (
 function App() {
     return (
         <Grommet theme={theme}>
-            <Router basename="/api/react">
+            <Router basename="react">
                 <Switch>
                     <Route path="/login">
-                        <AppBar>MUD.</AppBar>
+                        <NavBar />
                         <Login />
                     </Route>
                     <Route path="/register">
-                        <AppBar>MUD.</AppBar>
+                        <NavBar />
                         <Register />
                     </Route>
                     <Route path="/game">
-                        <AppBar>MUD.</AppBar>
+                        <NavBar />
                         <Game />
                     </Route>
                     <Route exact path="/">
-                        <AppBar>MUD.</AppBar>
+                        <NavBar />
                         <Heading>
                             Welcome to the...
                             <br /> Multi-User Dungeon (MUD) <br />
