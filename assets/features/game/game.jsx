@@ -15,13 +15,15 @@ import {
     TextInput,
 } from "grommet"
 
-const DIRECTION_MAP = JSON.parse(
-    document.getElementById("direction_maps").textContent
-)
-
 const directionMap = {
-    ...DIRECTION_MAP["DIRECTION_MAP"],
-    ...DIRECTION_MAP["REVERSE_DIRECTION_MAP"],
+    north: "n",
+    south: "s",
+    west: "w",
+    east: "e",
+    n: "north",
+    e: "east",
+    s: "south",
+    w: "west",
 }
 
 const initDirections = {
@@ -44,7 +46,7 @@ function Game() {
     React.useEffect(() => {
         api.initialize()
             .then(res => {
-                setRoom({ ...res.data })
+                setRoom({ ...res })
             })
             .catch(err => setError(err.message))
     }, [])
@@ -52,6 +54,7 @@ function Game() {
     function handleMove(direction) {
         api.move(direction)
             .then(res => {
+                console.log({ res })
                 if (res.data.error_msg) {
                     setError(res.data.error_msg)
                     setValid(prev => ({
@@ -89,7 +92,7 @@ function Game() {
                             <Text>
                                 Other Players:
                                 <br />
-                                {room.players.length > 0
+                                {room?.players?.length > 0
                                     ? room.players.map(player => (
                                           <p key={player.uuid}>{player.name}</p>
                                       ))
