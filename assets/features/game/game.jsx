@@ -53,16 +53,15 @@ function Game() {
 
     function handleMove(direction) {
         api.move(direction)
-            .then(res => {
-                console.log({ res })
-                if (res.data.error_msg) {
-                    setError(res.data.error_msg)
+            .then(data => {
+                if (data.error_msg) {
+                    setError(data.error_msg)
                     setValid(prev => ({
                         ...prev,
                         [directionMap[direction]]: false,
                     }))
                 } else {
-                    setRoom(res.data)
+                    setRoom(data)
                     setValid(initDirections)
                     setError(null)
                 }
@@ -89,15 +88,14 @@ function Game() {
                             <Text size="large" weight="bold">
                                 {room.description}
                             </Text>
-                            <Text>
-                                Other Players:
-                                <br />
+                            <Box>
+                                <Text>Other Players:</Text>
                                 {room?.players?.length > 0
                                     ? room.players.map(player => (
-                                          <p key={player.uuid}>{player.name}</p>
+                                          <p key={player}>{player}</p>
                                       ))
                                     : "None"}
-                            </Text>
+                            </Box>
                         </CardBody>
                         <CardFooter>
                             <Box width="large" direction="row" justify="evenly">

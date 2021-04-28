@@ -2,13 +2,11 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.contrib.auth.models import User, Group
-from django import forms
 
 from rest_framework import viewsets, permissions
-from rest_framework.views import APIView
 
-from .models import Room, Player, Direction
-from .serializers import UserSerializer, GroupSerializer, PlayerSerializer, RoomSerializer, DirectionSerializer
+from .models import Room, Player
+from .serializers import UserSerializer, GroupSerializer, PlayerSerializer, RoomSerializer
 
 
 # --------------------------------
@@ -37,10 +35,6 @@ class PlayerViewSet(viewsets.ModelViewSet):
     serializer_class = PlayerSerializer
 
 
-class DirectionViewSet(APIView):
-    serializer_class = DirectionSerializer
-
-
 # --------------------------------
 # TEMPLATED VIEWS
 # --------------------------------
@@ -60,14 +54,3 @@ class GameView(TemplateView):
                 "REGISTER": "{% url 'api-register' %}"
             }
         }
-
-
-class DirectionForm(forms.ModelForm):
-    direction = forms.CharField(
-        max_length=3,
-        widget=forms.Select(choices=Direction.DIRECTION_OPTIONS)
-    )
-
-    class Meta:
-        model = Direction
-        fields = ["direction"]

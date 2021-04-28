@@ -21,7 +21,12 @@ function Login() {
                         value={userInput}
                         onChange={nextValue => setUserInput(nextValue)}
                         onReset={() => setUserInput(initState)}
-                        onSubmit={({ value }) => api.login(value)}
+                        onSubmit={({ value }) =>
+                            api
+                                .login(value)
+                                .then(res => push("/game"))
+                                .catch(err => setError(err.message))
+                        }
                     >
                         <FormField name="username" label="Username">
                             <TextInput name="username" />

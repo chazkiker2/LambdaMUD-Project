@@ -20,6 +20,6 @@ urlpatterns = [
     path(r"react/", ReactView.as_view(), name="react_app"),
     # this route catches any url below the main one, so the path can be passed to the front end
     path(r'react/<path:path>', ReactView.as_view(), name='react_app_with_path'),
-    path("api-login", csrf_exempt(LoginView.as_view()), name="api-login"),
-    path("api-register", csrf_exempt(RegisterView.as_view()), name="api-register"),
+    path("api-login", LoginView.as_view(), name="api-login"),
+    path("api-register", RegisterView.as_view(), name="api-register"),
 ]

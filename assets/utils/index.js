@@ -20,20 +20,22 @@ function config() {
         csrfCookieName: "csrftoken",
         csrfHeaderName: "X-CSRFToken",
     })
-    window.client = new window.coreapi.Client({ auth })
+    let client = new window.coreapi.Client({ auth })
+    window.client = client
+    return { client, schema: window.schema }
 }
 
 function act(path, params) {
-    config()
-    if (!window.schema) {
-        throw new Error("window.schema should not be undefined")
+    const { client, schema } = config()
+    if (!schema) {
+        throw new Error("schema should not be undefined")
     }
-    return window.client.action(window.schema, path, params)
+    return client.action(schema, path, params)
 }
 
 function loginUser({ username, password }) {
     let params = { username, password }
-    act(["api", "api-login", "create"], params)
+    return act(["api", "api-login", "create"], params)
         .then(res => {
             window.localStorage.setItem("key", res["key"])
             return Promise.resolve()
