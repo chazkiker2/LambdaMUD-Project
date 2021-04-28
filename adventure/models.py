@@ -74,24 +74,6 @@ class Player(models.Model):
             return self.room()
 
 
-class Direction(models.Model):
-    NORTH = "n"
-    SOUTH = "s"
-    EAST = "e"
-    WEST = "w"
-    DIRECTION_OPTIONS = [
-        (NORTH, 'North'),
-        (SOUTH, 'South'),
-        (EAST, 'East'),
-        (WEST, 'West'),
-    ]
-    direction = models.CharField(
-        max_length=1,
-        choices=DIRECTION_OPTIONS,
-        default=NORTH,
-    )
-
-
 @receiver(post_save, sender=User)
 def create_user_player(sender, instance, created, **kwargs):
     if created:

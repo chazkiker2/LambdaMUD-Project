@@ -1,15 +1,15 @@
-import coreapi
-from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
-from pusher import Pusher
 from django.http import JsonResponse
-from decouple import config
-from django.contrib.auth.models import User
-from .models import *
-from .views import DirectionForm
+
 from rest_framework.decorators import api_view, schema
 from rest_framework.schemas import AutoSchema
+
+from pusher import Pusher
+from decouple import config
+from coreapi import Field
+
 import json
+
+from .models import *
 
 # instantiate pusher
 pusher = Pusher(
@@ -21,8 +21,10 @@ pusher = Pusher(
 
 
 # ex: "/api/adv/init/"
-# curl: curl -X GET -H 'Authorization: Token TOKEN' localhost:8000/api/adv/init/
-@csrf_exempt
+#
+# curl: curl -X GET \
+#    -H 'Authorization: Token TOKEN' \
+#    localhost:8000/api/adv/init/
 @api_view(["GET"])
 def initialize(request):
     user = request.user
@@ -47,20 +49,25 @@ class MoveSchema(AutoSchema):
     def get_manual_fields(self, path, method):
         custom_fields = []
         if method.lower() == "post":
-            custom_fields.append(coreapi.Field(
-                "direction",
-                required=True,
-                location="form",
-                description="direction to move",
-                example="n"
-            ))
+            custom_fields.append(
+                Field(
+                    "direction",
+                    required=True,
+                    location="form",
+                    description="direction to move",
+                    example="n"
+                )
+            )
         return custom_fields
 
 
 # ex: "/api/adv/move/"
 #
-# curl -X POST -H 'Authorization: Token TOKEN' -H "Content-Type: application/json" \
-# -d '{"direction":"n"}' localhost:8000/api/adv/move/
+# curl -X POST \
+#   -H 'Authorization: Token TOKEN' \
+#   -H "Content-Type: application/json" \
+#   -d '{"direction":"n"}' \
+#   localhost:8000/api/adv/move/
 @api_view(["POST"])
 @schema(MoveSchema())
 def move(request):
@@ -124,9 +131,11 @@ def move(request):
 
 # ex: "/api/adv/say"
 #
-# curl -X POST -H 'Authorization: Token TOKEN' -H "Content-Type: application/json" \
-# -d '{"message":"Hello World!"}' localhost:8000/api/adv/say/
-@csrf_exempt
+# curl -X POST \
+#   -H 'Authorization: Token TOKEN' \
+#   -H "Content-Type: application/json" \
+#   -d '{"message":"Hello World!"}' \
+#   localhost:8000/api/adv/say/
 @api_view(["POST"])
 def say(request):
     player = request.user.player

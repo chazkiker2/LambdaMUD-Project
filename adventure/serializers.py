@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 
-from .models import Room, Player, Direction
+from .models import Room, Player
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -38,9 +38,3 @@ class PlayerSerializer(serializers.HyperlinkedModelSerializer):
             "current_room",
             "uuid",
         ]
-
-
-class DirectionSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Direction
-        fields = ["direction"]
