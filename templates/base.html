@@ -17,6 +17,10 @@
 </head>
 <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>
+<!-- load the coreapi -- accessible from window.coreapi -->
+<script src="{% static 'rest_framework/js/coreapi-0.1.1.js' %}"></script>
+<!-- load API schema -- accessible from window.schema -->
+<script src="{% url 'api-docs:schema-js' %}"></script>
 <div id="content">
     {% block content %}{% endblock %}
 </div>
