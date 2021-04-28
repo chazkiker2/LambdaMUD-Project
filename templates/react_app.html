@@ -1,15 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <!--
-    Load the CoreAPI library and the API schema.
-    /static/rest_framework/js/coreapi-0.1.1.js
-    /docs/schema.js
-    -->
+    <!-- load the coreapi -- accessible from window.coreapi -->
     <script src="{% static 'rest_framework/js/coreapi-0.1.1.js' %}"></script>
+    <!-- load API schema -- accessible from window.schema -->
     <script src="{% url 'api-docs:schema-js' %}"></script>
     <div id="root"></div>
-    {{ direction_maps|json_script:"direction_maps" }}
-    {{ urls|json_script:"urls" }}
     <script src="{% static 'bundle.js' %}"></script>
 {% endblock %}
