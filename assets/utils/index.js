@@ -16,23 +16,7 @@ function act(path, params) {
     if (!schema) {
         throw new Error("schema should not be undefined")
     }
-    let level = schema.content
-    for (let i = 0; i < path.length; i++) {
-        console.log({ i, schemaLevel: level })
-        level = level[path[i]]
-    }
-    const clientResponse = client.action(schema, path, params)
-    console.log({
-        client,
-        schema,
-        path,
-        params,
-        atPath: schema[[...path]],
-        level,
-    })
-    console.log({ clientResponse })
-
-    return clientResponse
+    return client.action(schema, path, params)
 }
 
 function loginUser({ username, password }) {
@@ -40,10 +24,10 @@ function loginUser({ username, password }) {
     return act(["api", "api-login", "create"], params)
         .then(res => {
             window.localStorage.setItem("key", res["key"])
-            return Promise.resolve()
+            return Promise.resolve(res)
         })
         .catch(err => {
-            console.log({ err })
+            console.error(err)
             return Promise.reject(err)
         })
 }
@@ -52,10 +36,10 @@ function registerUser(params) {
     return act(["api", "api-register", "create"], params)
         .then(res => {
             window.localStorage.setItem("key", res["key"])
-            return Promise.resolve()
+            return Promise.resolve(res)
         })
         .catch(err => {
-            console.log({ err })
+            console.error(err)
             return Promise.reject(err)
         })
 }
