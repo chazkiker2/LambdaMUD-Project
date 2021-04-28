@@ -1,10 +1,9 @@
-from .create_world import main as create_world
 from django.core import management
 from time import sleep
 
 
 def main():
-    create_world()
+    management.call_command("shell" "< create_world.py")
     management.call_command("makemigrations")
     sleep(secs=5)
     management.call_command("migrate")
