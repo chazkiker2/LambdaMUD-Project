@@ -16,7 +16,11 @@ function act(path, params) {
     if (!schema) {
         throw new Error("schema should not be undefined")
     }
-    return client.action(schema, path, params)
+    const clientResponse = client.action(schema, path, params)
+    console.log({client, schema})
+    console.log({clientResponse})
+
+    return clientResponse
 }
 
 function loginUser({ username, password }) {
@@ -27,7 +31,7 @@ function loginUser({ username, password }) {
             return Promise.resolve()
         })
         .catch(err => {
-            console.error({ err })
+            console.log({ err })
             return Promise.reject(err)
         })
 }
