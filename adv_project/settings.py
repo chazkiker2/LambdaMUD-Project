@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-from decouple import config
+from decouple import config, UndefinedValueError
 import django_heroku
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 
@@ -25,7 +25,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', cast=bool)
+try:
+    DEBUG = config('DEBUG', cast=bool)
+except UndefinedValueError:
+    DEBUG = False
 
 ALLOWED_HOSTS = []
 
