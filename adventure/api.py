@@ -1,7 +1,8 @@
 from django.http import JsonResponse
 
-from rest_framework.decorators import api_view, schema
+from rest_framework.decorators import api_view, schema, permission_classes
 from rest_framework.schemas import AutoSchema
+from rest_framework.permissions import IsAuthenticated
 
 from pusher import Pusher
 from decouple import config
@@ -26,20 +27,17 @@ pusher = Pusher(
 #    -H 'Authorization: Token TOKEN' \
 #    localhost:8000/api/adv/init/
 @api_view(["GET"])
+@permission_classes([IsAuthenticated])
 def initialize(request):
-    user = request.user
-    player = user.player
-    player_id = player.id
-    player_uuid = player.uuid
+    player = request.user.player
     room = player.room()
-    players = room.player_names(player_id)
     return JsonResponse(
         {
-            'uuid': player_uuid,
+            'uuid': player.uuid,
             'name': player.user.username,
             'title': room.title,
             'description': room.description,
-            'players': players
+            'players': room.player_names(player.id)
         },
         safe=True
     )
@@ -69,12 +67,11 @@ class MoveSchema(AutoSchema):
 #   -d '{"direction":"n"}' \
 #   localhost:8000/api/adv/move/
 @api_view(["POST"])
+@permission_classes([IsAuthenticated])
 @schema(MoveSchema())
 def move(request):
     player = request.user.player
     player_id = player.id
-    player_uuid = player.uuid
-    print(f"{request.data=}")
     direction = request.data["direction"]
     room = player.room()
     next_room_id = None
@@ -137,6 +134,7 @@ def move(request):
 #   -d '{"message":"Hello World!"}' \
 #   localhost:8000/api/adv/say/
 @api_view(["POST"])
+@permission_classes([IsAuthenticated])
 def say(request):
     player = request.user.player
     message = json.loads(request.body)["message"]
