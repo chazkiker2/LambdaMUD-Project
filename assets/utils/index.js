@@ -20,8 +20,11 @@ function config() {
         csrfCookieName: "csrftoken",
         csrfHeaderName: "X-CSRFToken",
     })
+    console.log({auth})
     let client = new window.coreapi.Client({ auth })
+    console.log({client})
     window.client = client
+    console.log({schema: window.schema})
     return { client, schema: window.schema }
 }
 
