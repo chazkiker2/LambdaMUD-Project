@@ -1,17 +1,3 @@
-import axios from "axios"
-
-const API_BASE_URL = "http://127.0.0.1:8000"
-
-const axiosAuth = function () {
-    const token = window.localStorage.getItem("key")
-    return axios.create({
-        headers: {
-            Authorization: `Token ${token}`,
-        },
-        baseURL: API_BASE_URL,
-    })
-}
-
 /**
  * create a new instance of client with the proper CSRF information
  */
@@ -20,11 +6,8 @@ function config() {
         csrfCookieName: "csrftoken",
         csrfHeaderName: "X-CSRFToken",
     })
-    console.log({auth})
     let client = new window.coreapi.Client({ auth })
-    console.log({client})
     window.client = client
-    console.log({schema: window.schema})
     return { client, schema: window.schema }
 }
 
@@ -62,9 +45,6 @@ function registerUser(params) {
 }
 
 export const api = {
-    API_BASE_URL,
-    axios: axios.create({ baseURL: API_BASE_URL }),
-    axiosAuth,
     config,
     act,
     login: loginUser,
