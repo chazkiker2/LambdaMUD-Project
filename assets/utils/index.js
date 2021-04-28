@@ -61,11 +61,8 @@ export const api = {
     act,
     login: loginUser,
     register: registerUser,
-    // initialize: () => axiosAuth().get("/api/adv/init"),
     initialize: () => act(["adv", "init", "list"]),
-    // move: direction => axiosAuth().post("/api/adv/move", { direction }),
     move: direction => act(["adv", "move", "create"], { direction }),
-    // say: message => axiosAuth().post("/api/adv/say", { message }),
     say: message => act(["adv", "say"], { message }),
 }
 

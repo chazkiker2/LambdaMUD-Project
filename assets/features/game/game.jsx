@@ -15,13 +15,7 @@ import {
     TextInput,
 } from "grommet"
 
-// const DIRECTION_MAP = JSON.parse(
-//     document.getElementById("direction_maps").textContent
-// )
-
 const directionMap = {
-    // ...DIRECTION_MAP["DIRECTION_MAP"],
-    // ...DIRECTION_MAP["REVERSE_DIRECTION_MAP"],
     north: "n",
     south: "s",
     west: "w",
@@ -60,6 +54,7 @@ function Game() {
     function handleMove(direction) {
         api.move(direction)
             .then(res => {
+                console.log({ res })
                 if (res.data.error_msg) {
                     setError(res.data.error_msg)
                     setValid(prev => ({

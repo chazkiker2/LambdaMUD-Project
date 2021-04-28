@@ -24,6 +24,6 @@ urlpatterns = [
         version="1.0.0"
     ), name='openapi-docs'),
     url('init', api.initialize),
-    url('move', api.move),
+    path('move', api.move),
     url('say', api.say),
 ]
