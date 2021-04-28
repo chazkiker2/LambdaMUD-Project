@@ -4,8 +4,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth.models import User, Group
 from django import forms
 
-from rest_framework import viewsets
-from rest_framework import permissions
+from rest_framework import viewsets, permissions
 from rest_framework.views import APIView
 
 from .models import Room, Player, Direction
