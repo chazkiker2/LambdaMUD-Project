@@ -51,7 +51,7 @@ export const api = {
     register: registerUser,
     initialize: () => act(["adv", "init", "list"]),
     move: direction => act(["adv", "move", "create"], { direction }),
-    say: message => act(["adv", "say"], { message }),
+    say: message => act(["adv", "say", "create"], { message }),
 }
 
 export default api
