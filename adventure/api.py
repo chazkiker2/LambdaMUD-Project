@@ -60,6 +60,21 @@ class MoveSchema(AutoSchema):
         return custom_fields
 
 
+class SaySchema(AutoSchema):
+    def get_manual_fields(self, path, method):
+        custom_fields = []
+        if method.lower() == "post":
+            custom_fields.append(
+                Field(
+                    "message",
+                    required=True,
+                    location="form",
+                    description="message to send to other users"
+                )
+            )
+
+        return custom_fields
+
 # ex: "/api/adv/move/"
 #
 # curl -X POST \
@@ -135,10 +150,11 @@ def move(request):
 #   -d '{"message":"Hello World!"}' \
 #   localhost:8000/api/adv/say/
 @api_view(["POST"])
-@permission_classes([IsAuthenticated])
+@schema(SaySchema())
 def say(request):
     player = request.user.player
-    message = json.loads(request.body)["message"]
+    # message = json.loads(request.body)["message"]
+    message = request.data["message"]
     room = player.room()
     players = {
         "names": room.player_names(player.id),
