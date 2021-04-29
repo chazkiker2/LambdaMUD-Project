@@ -27,7 +27,11 @@ pusher = Pusher(
 #    localhost:8000/api/adv/init/
 @api_view(["GET"])
 def initialize(request):
+    user = request.user
+    print(f"{user=}")
     player = request.user.player
+    print(f"{player=}")
+    player_id = player.id
     room = player.room()
     return JsonResponse(
         {
@@ -35,7 +39,7 @@ def initialize(request):
             'name': player.user.username,
             'title': room.title,
             'description': room.description,
-            'players': room.player_names(player.id)
+            'players': room.player_names(player_id)
         },
         safe=True
     )
