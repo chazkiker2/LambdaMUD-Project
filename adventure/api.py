@@ -1,7 +1,7 @@
 from django.http import JsonResponse
-
-from rest_framework.decorators import api_view, schema
+from rest_framework.decorators import api_view, schema, permission_classes
 from rest_framework.schemas import AutoSchema
+from rest_framework.permissions import IsAuthenticated
 
 from pusher import Pusher
 from decouple import config
@@ -26,6 +26,7 @@ pusher = Pusher(
 #    -H 'Authorization: Token TOKEN' \
 #    localhost:8000/api/adv/init/
 @api_view(["GET"])
+@permission_classes([IsAuthenticated])
 def initialize(request):
     user = request.user
     player = request.user.player
@@ -59,6 +60,21 @@ class MoveSchema(AutoSchema):
         return custom_fields
 
 
+class SaySchema(AutoSchema):
+    def get_manual_fields(self, path, method):
+        custom_fields = []
+        if method.lower() == "post":
+            custom_fields.append(
+                Field(
+                    "message",
+                    required=True,
+                    location="form",
+                    description="message to send to other users"
+                )
+            )
+
+        return custom_fields
+
 # ex: "/api/adv/move/"
 #
 # curl -X POST \
@@ -67,6 +83,7 @@ class MoveSchema(AutoSchema):
 #   -d '{"direction":"n"}' \
 #   localhost:8000/api/adv/move/
 @api_view(["POST"])
+@permission_classes([IsAuthenticated])
 @schema(MoveSchema())
 def move(request):
     player = request.user.player
@@ -133,14 +150,17 @@ def move(request):
 #   -d '{"message":"Hello World!"}' \
 #   localhost:8000/api/adv/say/
 @api_view(["POST"])
+@schema(SaySchema())
 def say(request):
     player = request.user.player
-    message = json.loads(request.body)["message"]
+    # message = json.loads(request.body)["message"]
+    message = request.data["message"]
     room = player.room()
     players = {
         "names": room.player_names(player.id),
         "uuids": room.player_uuids(player.id)
     }
+
     for p_uuid in players["uuids"]:
         pusher.trigger(
             f"p-channel-{p_uuid}",

@@ -1,7 +1,7 @@
 from django.contrib import admin
-from django.contrib.auth.models import User, Group
 from django.conf.urls import include
 from django.urls import path
+from django.shortcuts import redirect
 
 from django.views.generic import TemplateView
 from rest_framework.documentation import include_docs_urls
@@ -14,7 +14,12 @@ class ReactView(TemplateView):
         return {"context_variable": "value"}
 
 
+def index(request):
+    return redirect("react_app")
+
+
 urlpatterns = [
+    path("", index),
     path("admin/", admin.site.urls),
     path('api/', include('api.urls')),
     path('adv/', include('adventure.urls')),

@@ -141,7 +141,7 @@ function Game() {
                             })
                             .catch(err => {
                                 // TODO: display failure message
-                                console.log(err)
+                                console.error(err)
                             })
                     }}
                 >
