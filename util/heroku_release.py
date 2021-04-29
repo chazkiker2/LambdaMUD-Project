@@ -3,7 +3,7 @@ from time import sleep
 
 
 def main():
-    management.call_command("shell" "< create_world.py")
+    management.call_command("shell", "< create_world.py")
     management.call_command("makemigrations")
     sleep(secs=5)
     management.call_command("migrate")

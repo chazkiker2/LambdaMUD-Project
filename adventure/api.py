@@ -31,7 +31,8 @@ def initialize(request):
     print(f"{user=}")
     player = request.user.player
     print(f"{player=}")
-    player_id = player.id
+    player_id = user.id
+    print(f"{player.id=}\n{user.id=}")
     room = player.room()
     return JsonResponse(
         {
