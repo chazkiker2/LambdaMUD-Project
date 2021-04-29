@@ -1,3 +1,5 @@
+from django.contrib import admin
+from django.contrib.auth.models import User, Group
 from django.conf.urls import include
 from django.urls import path
 
@@ -13,6 +15,7 @@ class ReactView(TemplateView):
 
 
 urlpatterns = [
+    path("admin/", admin.site.urls),
     path('api/', include('api.urls')),
     path('adv/', include('adventure.urls')),
     path('docs/', include_docs_urls(
