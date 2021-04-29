@@ -64,6 +64,8 @@ creative guide.
 
 ## Links & Resources
 
+- [Deployed Site](https://safe-everglades-77281.herokuapp.com/react/game)
+- [Documentation](https://safe-everglades-77281.herokuapp.com/docs/)
 - [Trello Board](https://trello.com/b/lSiqM44H/lambdamud-chaz)
 
 ## Git Commits
@@ -87,11 +89,11 @@ creative guide.
 
 ### Client
 
-- [ ] Create a standalone frontend app that communicates with the server via API calls
-- [ ] Be able to create a new account on the server (implemented on server)
-- [ ] Be able to log in to the server (implemented on server)
-- [ ] Create an interface that displays the current room name, its description and the other players in the room
-- [ ] Be able to move between rooms and update the display accordingly (implemented on server)
+- [x] Create a standalone frontend app that communicates with the server via API calls
+- [x] Be able to create a new account on the server (implemented on server)
+- [x] Be able to log in to the server (implemented on server)
+- [x] Create an interface that displays the current room name, its description and the other players in the room
+- [x] Be able to move between rooms and update the display accordingly (implemented on server)
 - [ ] Be able to use a `say` command to say things that other people in the room will see (server implementation incomplete)
 - [ ] Upon login, subscribe to a Pusher channel based on the player's universally unique id: `p-channel-<uuid>`
 - [ ] Bind the player channel to `broadcast` events and display the messages to the player
@@ -101,7 +103,7 @@ creative guide.
 ### Server
 
 - [ ] Create a new API endpoint for `say` which broadcasts a message to other players in the current room
-- [ ] Deploy to Heroku
+- [x] Deploy to Heroku
 
 ### General
 
