@@ -44,6 +44,13 @@ function registerUser(params) {
         })
 }
 
+function say({message}) {
+
+    return act(["adv", "say", "create"], {message})
+}
+
+
+
 export const api = {
     config,
     act,
@@ -51,7 +58,7 @@ export const api = {
     register: registerUser,
     initialize: () => act(["adv", "init", "list"]),
     move: direction => act(["adv", "move", "create"], { direction }),
-    say: message => act(["adv", "say", "create"], { message }),
+    say,
 }
 
 export default api
