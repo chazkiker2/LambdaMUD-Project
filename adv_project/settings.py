@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',  # new
     'adventure.apps.AdventureConfig',
     'api.apps.ApiConfig',
     'corsheaders',
@@ -66,6 +67,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+
 ]
 
 ROOT_URLCONF = 'adv_project.urls'
@@ -100,10 +102,10 @@ DATABASES = {
         "HOST": config("DB_HOST"),
         "PORT": config("DB_PORT")
     },
-    'alt': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    # 'alt': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
 }
 
 # Password validation
@@ -165,7 +167,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))  # new
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'  # new
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'  # new
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

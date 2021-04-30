@@ -6,21 +6,21 @@ function config() {
         csrfCookieName: "csrftoken",
         csrfHeaderName: "X-CSRFToken",
     })
-    let client = new window.coreapi.Client({ auth })
+    let client = new window.coreapi.Client({auth})
     window.client = client
-    return { client, schema: window.schema }
+    return {client, schema: window.schema}
 }
 
 function act(path, params) {
-    const { client, schema } = config()
+    const {client, schema} = config()
     if (!schema) {
         throw new Error("schema should not be undefined")
     }
     return client.action(schema, path, params)
 }
 
-function loginUser({ username, password }) {
-    let params = { username, password }
+function loginUser({username, password}) {
+    let params = {username, password}
     return act(["api", "api-login", "create"], params)
         .then(res => {
             window.localStorage.setItem("key", res["key"])
@@ -48,16 +48,14 @@ function sayMessage({message}) {
     return act(["adv", "say", "create"], {message})
 }
 
-
-
 export const api = {
     config,
     act,
     login: loginUser,
     register: registerUser,
     initialize: () => act(["adv", "init", "list"]),
-    move: direction => act(["adv", "move", "create"], { direction }),
-    say: sayMessage,
+    move: direction => act(["adv", "move", "create"], {direction}),
+    say: sayMessage
 }
 
 export default api

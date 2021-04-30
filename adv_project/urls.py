@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.conf.urls import include
 from django.urls import path
 from django.shortcuts import redirect
-
 from django.views.generic import TemplateView
 from rest_framework.documentation import include_docs_urls
 
@@ -31,5 +30,4 @@ urlpatterns = [
     path(r"react/", ReactView.as_view(), name="react_app"),
     # this route catches any url below the main one, so the path can be passed to the front end
     path(r'react/<path:path>', ReactView.as_view(), name='react_app_with_path'),
-
 ]
